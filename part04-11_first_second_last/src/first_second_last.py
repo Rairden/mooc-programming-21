@@ -1,5 +1,18 @@
-# Write your solution here
-# You can test your function by calling it within the following block
+def first_word(str):
+    arr = str.split(" ")
+    return arr[0]
+
+
+def second_word(str):
+    arr = str.split(" ")
+    return arr[1]
+
+
+def last_word(str):
+    arr = str.split(" ")
+    return arr[-1]
+
+
 if __name__ == "__main__":
     sentence = "once upon a time there was a programmer"
     print(first_word(sentence))

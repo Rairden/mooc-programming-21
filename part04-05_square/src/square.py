@@ -1,9 +1,16 @@
-# Copy here code of line function from previous exercise
+def line(num, str):
+    for _ in range(0, num):
+        if len(str) == 0:
+            print("*", end="")
+        else:
+            print(str[0], end="")
+    print()
 
-def nelio(size, character):
-    # You should call function line here with proper parameters
-    line(4, "x")
 
-# You can test your function by calling it within the following block
+def square(size, character):
+    for _ in range(0, size):
+        line(size, character)
+
+
 if __name__ == "__main__":
     square(5, "x")

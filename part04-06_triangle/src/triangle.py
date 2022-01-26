@@ -1,9 +1,16 @@
-# Copy here code of line function from previous exercise
+def line(num, str):
+    for _ in range(0, num):
+        if len(str) == 0:
+            print("*", end="")
+        else:
+            print(str[0], end="")
+    print()
+
 
 def triangle(size):
-    # You should call function line here with proper parameters
-    line(4, "#")
+    for i in range(1, size + 1):
+        line(i, "#")
 
-# You can test your function by calling it within the following block
+
 if __name__ == "__main__":
     triangle(5)
