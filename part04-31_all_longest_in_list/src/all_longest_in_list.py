@@ -1,25 +1,12 @@
 def all_the_longest(str: list):
-    longestStr = 0
-    longest = []
+    result = [""]
+    for s in str:
+        if len(s) > len(result[0]):
+            result = [s]
+        elif len(s) == len(result[0]):
+            result.append(s)
 
-    for i, name in enumerate(str):
-        if len(name) >= longestStr:
-            longestStr = len(name)
-            longest.append(i)
-
-    res = []
-    for i in range(len(longest) - 1):
-        if len(str[longest[i]]) >= len(str[longest[i + 1]]):
-            res.append(str[longest[i]])
-
-    if len(str[longest[-1]]) >= len(str[longest[0]]):
-        res.append(str[longest[-1]])
-
-    for i in range(len(res) - 1):
-        if len(res[i]) < len(res[i + 1]):
-            res = res[i + 1:]
-
-    return res
+    return result
 
 
 if __name__ == '__main__':
