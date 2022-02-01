@@ -12,56 +12,32 @@ def print_student(students: dict, name):
     avgGrade = 0
     sum = 0
 
-    totalCourses = calcNumberOfCourses(courses)
-
     print(f"{name}:\n {totalCourses} completed courses:")
 
-    courseSeen = set()
-    courseSeenIdx = set()
-
-    for i, c in enumerate(reversed(courses)):
-        if c[0] in courseSeen:
-            continue
-        courseSeen.add(c[0])
-        courseSeenIdx.add(i)
-        sum += c[1]
-
-        print(f"  {c[0]} {c[1]}")
-
-    if len(courses) > 2:
-        for i in courseSeenIdx:
-            del courses[i]
+    for course, grade in courses.items():
+        sum += grade[1]
+        print(f"  {course} {grade[1]}")
 
     print(" average grade", sum / totalCourses)
 
 
-def calcNumberOfCourses(courses: list):
-    cnt = 0
-    courseSeen = set()
-    for c in reversed(courses):
-        if c[0] in courseSeen:
-            continue
-        courseSeen.add(c[0])
-        cnt += 1
-
-    return cnt
-
-
 def add_student(students: dict, name):
-    students[name] = []
+    students[name] = {}
 
 
-def add_course(students: dict, name, course: tuple):
-    if course[1] == 0:
+def add_course(students: dict, name, completed: tuple):
+    if completed[1] == 0:
         return
 
-    if name in students:
-        courses = students[name]
-        for c in courses:
-            if c[0] == course[0] and c[1] > course[1]:
-                return
+    completedCourses = students[name]
+    course = completed[0]
+    grade = completed[1]
 
-    students[name].append(course)
+    if course in completedCourses:
+        if completedCourses[course][1] > grade:
+            return
+
+    completedCourses[course] = completed
 
 
 def summary(students: dict):
@@ -76,21 +52,15 @@ def summary(students: dict):
     highestAvg = 0
     bestStudent = ""
 
-    for key, val in students.items():
-        numCourses = calcNumberOfCourses(val)
+    for key, courses in students.items():
         gradeSum = 0
-        courseSeen = set()
+        numCourses = len(courses)
+        for c in courses:
+            gradeSum += courses[c][1]
 
-        for i, c in enumerate(reversed(val)):
-            if c[0] in courseSeen:
-                continue
-
-            courseSeen.add(c[0])
-            gradeSum += c[1]
-
-            if numCourses > mostCourses:
-                mostCourses = numCourses
-                mostCompleted = key
+        if numCourses > mostCourses:
+            mostCourses = numCourses
+            mostCompleted = key
 
         avg = gradeSum / numCourses
         if avg > highestAvg:
@@ -160,8 +130,8 @@ def test5():
 
 
 if __name__ == '__main__':
-    # test1()
+    test1()
     # test2()
-    test3()
+    # test3()
     # test4()
     # test5()
